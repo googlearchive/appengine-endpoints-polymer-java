@@ -1,0 +1,77 @@
+{
+  "extends" : "thirdParty.api",
+  "abstract" : false,
+  "root" : "https://--------your-application-id-here--------.appspot.com/_ah/api",
+  "name" : "greetings",
+  "version" : "v1",
+  "description" : "A simple and polite API",
+  "defaultVersion" : false,
+  "adapter" : {
+    "bns" : "https://--------your-application-id-here--------.appspot.com/_ah/spi",
+    "deadline" : 65.0,
+    "type" : "lily"
+  },
+  "auth" : {
+    "allowCookieAuth" : false
+  },
+  "frontendLimits" : {
+    "unregisteredUserQps" : -1,
+    "unregisteredQps" : -1,
+    "unregisteredDaily" : -1,
+    "rules" : [ ]
+  },
+  "cacheControl" : {
+    "type" : "no-cache",
+    "maxAge" : 0
+  },
+  "methods" : {
+    "greetings.hello" : {
+      "path" : "hello",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.endpoints.tutorial.GreetingsAPI.hello",
+      "request" : {
+        "parameters" : {
+          "who" : {
+            "type" : "string",
+            "required" : false
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    }
+  },
+  "descriptor" : {
+    "schemas" : {
+      "Greeting" : {
+        "id" : "Greeting",
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "format" : "int64"
+          },
+          "text" : {
+            "type" : "string"
+          },
+          "avatarId" : {
+            "type" : "integer"
+          }
+        }
+      }
+    },
+    "methods" : {
+      "com.endpoints.tutorial.GreetingsAPI.hello" : {
+        "response" : {
+          "$ref" : "Greeting"
+        }
+      }
+    }
+  }
+}

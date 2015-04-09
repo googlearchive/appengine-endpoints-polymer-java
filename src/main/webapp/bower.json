@@ -1,0 +1,42 @@
+{
+  "name": "appengine-endpoints-polymer-java-maven",
+  "version": "1.0",
+  "homepage": "https://github.com/martin-gorner/endpoints-polymer-material-tutorial",
+  "authors": [
+    "Martin Görner <martin.gorner@gmail.com>",
+    "ludoch <ludovic.champenois@gmail.com>"
+
+  ],
+  "main": "index.html",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "context-free-parser": "Polymer/context-free-parser#^0.4.0",
+    "core-animated-pages": "Polymer/core-animated-pages#^0.4.0",
+    "core-a11y-keys": "Polymer/core-a11y-keys#^0.4.0",
+    "core-ajax": "Polymer/core-ajax#^0.4.0",
+    "core-collapse": "Polymer/core-collapse#^0.4.0",
+    "core-docs": "Polymer/core-docs#^0.4.0",
+    "core-drag-drop": "Polymer/core-drag-drop#^0.4.0",
+    "core-drawer-panel": "Polymer/core-drawer-panel#^0.4.0",
+    "core-animation": "Polymer/core-animation#^0.4.0",
+    "core-dropdown": "Polymer/core-dropdown#^0.4.0",
+    "core-elements": "Polymer/core-elements#~0.4.1",
+    "paper-dialog": "Polymer/paper-dialog#^0.4.0",
+    "paper-checkbox": "Polymer/paper-checkbox#^0.4.0",
+    "paper-dropdown-menu": "Polymer/paper-dropdown-menu#^0.4.0",
+    "paper-input": "Polymer/paper-input#^0.4.0",
+    "paper-menu-button": "Polymer/paper-menu-button#^0.4.0",
+    "paper-progress": "Polymer/paper-progress#^0.4.0",
+    "paper-radio-group": "Polymer/paper-radio-group#^0.4.0",
+    "paper-elements": "Polymer/paper-elements#~0.4.1"
+  }
+
+}

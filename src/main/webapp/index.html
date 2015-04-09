@@ -1,0 +1,106 @@
+<!DOCTYPE HTML>
+
+<!-- COMPLETE version of the code lab:
+     a complete endpoints / polymer app
+     with datastore on the backend and
+     polymer data binding on the front
+     end. The app will remember the user
+     and always show the same avatar for
+     the same user. The "x" button on the
+     greeting cards is now functional.-->
+     
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>Hello Cloud Endpoints</title>
+    <script type="text/javascript">
+   
+    	var polymerReady = false;
+    	var gapiReady    = false;
+    	
+    	// this will be executed when polymer and the DOM are ready
+	document.addEventListener('polymer-ready', function() {
+		
+		polymerReady = true;
+		
+		// call the API when a value is entered into the input box
+		var inputBox    = document.querySelector('paper-input');
+		inputBox.addEventListener('keyup', function(e) {
+				if (e.keyCode == 13)
+					do_call(inputBox.value);
+			});
+		
+	} ); 
+    	
+	// load our "greetings" API, we send a first call to the API as soon as it is loaded
+	function api_init() {
+		var protocol = window.location.host.search('localhost')==-1 ? 'https://' : 'http://' 
+		gapi.client.load('greetings', 'v1', function() {gapiReady = true; do_call('Mr. Jones')}, protocol + window.location.host + '/_ah/api');
+	}
+    	
+	// display a greeting card with a given text and avatar number
+	function display_new_card(id, text, avatarId) {
+		// in case the dom and polymer are not ready yet, retry in 300ms.
+		if (!polymerReady)
+			window.setTimeout(function(){display_new_card(id, text, avatarId)}, 300);
+		else {
+			// add it to the data model
+			var model = document.querySelector('greetings-list');
+			model.add(new Object({id: id, text: text, avatarSrc: "images/avatar-" + (avatarId + 1) + ".svg"}))
+		}
+	}
+	
+	// function to call our "greetings" API with a name
+	function do_call(name) {
+		if (gapiReady)
+			gapi.client.greetings.hello( {'who': name} ).execute(function(resp) {
+				if (!resp.code)
+				{
+					display_new_card(resp.id, resp.text, resp.avatarId);
+				}
+			})
+	}
+    </script>
+    
+    <!-- Google API init  -->
+    <script src="https://apis.google.com/js/client.js?onload=api_init"></script>
+    
+    <!-- POLYMER init and imports-->
+    <script src="bower_components/platform/platform.js"></script>
+    <link rel="import" href="bower_components/font-roboto/roboto.html">
+    <link rel="import" href="bower_components/core-header-panel/core-header-panel.html">
+    <link rel="import" href="bower_components/core-toolbar/core-toolbar.html">
+    <link rel="import" href="bower_components/core-icons/core-icons.html">
+    <link rel="import" href="bower_components/paper-button/paper-button.html">
+    <link rel="import" href="bower_components/paper-icon-button/paper-icon-button.html">
+    <link rel="import" href="bower_components/paper-input/paper-input.html">
+    <link rel="import" href="bower_components/paper-fab/paper-fab.html">
+    <link rel="import" href="bower_components/paper-dialog/paper-dialog.html">
+    <link rel="import" href="bower_components/paper-dialog/paper-dialog-transition.html">
+    <link rel="import" href="paper-card.html">
+    <link rel="import" href="greetings-list.html">
+    
+    <!-- styles specific to this app --> 
+    <link rel="stylesheet" type="text/css" href="styles.css" shim-shadowdom>
+
+  </head>
+
+<body unresolved>  
+	
+	<core-header-panel>
+		<core-toolbar>
+			<paper-icon-button icon="menu" onclick="document.querySelector('paper-dialog').toggle()"></paper-icon-button>
+			<div flex>Welcome</div>
+			<paper-input label="Type your name here"></paper-input>
+			<paper-fab icon="cloud" onclick="do_call(document.querySelector('paper-input').value)"></paper-fab>	
+		</core-toolbar>
+		<greetings-list layout horizontal wrap></greetings-list>
+	</core-header-panel>
+	
+	<paper-dialog closeSelector="*" transition="paper-dialog-transition-center">
+	  <center>Nothing here... yet</center>
+      <paper-button affirmative autofocus>OK</paper-button>
+    </paper-dialog>
+        
+  </body>
+</html>

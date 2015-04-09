@@ -1,0 +1,35 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="paper-card.html">
+
+<polymer-element name="greetings-list" attributes="list">
+    <template>
+    <style>
+    		paper-card { margin: 20px; }
+    </style>
+    	<template repeat="{{g in list}}">
+    		<paper-card heading="[[g.text]]" uid=[[g.id]]>
+    			<img src="[[g.avatarSrc]]">
+    		</paper-card>
+    		<!-- {{g.text}} is a two-way data binding -->
+    		<!-- [[g.text]] is a one-time data binding -->
+    		<!-- WARNING: do not even think of redefining standard HTML attributes like title, id, ... -->    		
+    	</template>
+    </template>
+	<script>
+	Polymer('greetings-list', {
+	  created: function() {
+	      this.list = [];
+	    },
+	  add: function(greeting) {
+		  this.list.unshift(greeting) // insert at the begining
+	  	},
+	  del: function(id) {
+		  // find the element with the correct id
+		  // trick: indexOf only works on arrays of base types so we map this array to an array if ids
+		  var i = this.list.map(function(e) {return e.id}).indexOf(id);
+	  	  if (i != -1)
+		  	this.list.splice(i, 1); // deletes 1 element at the i'th element
+	    }
+	});
+	</script>
+</polymer-element>
