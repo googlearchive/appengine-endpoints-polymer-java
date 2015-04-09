@@ -1,0 +1,57 @@
+	html, body {
+		height: 100%;
+		margin: 0;
+		background-color: #F5F5F5;
+		font-family: RobotoDraft, 'Helvetica Neue', Helvetica, Arial;
+	}
+    	
+	core-header-panel {
+		height: 100%; /*this is mandatory, otherwise the panel takes no space at all*/
+	}
+		  
+	core-toolbar {
+		background: #03a9f4;
+		padding-left: 10px;
+		padding-right: 10px;
+		color: white;
+		font-size: 20pt;
+	}
+		  
+	paper-input {
+		width: 18ex;
+		margin-bottom: 1ex !important;
+		font-size: 13pt;
+	}
+		
+	paper-input /deep/ .unfocused-underline  { background:rgba(255,255,255,0.8) }
+	paper-input /deep/ .focused-underline    { background:rgba(255,255,255,0.8) }
+	paper-input /deep/ .cursor               { background:rgba(255,255,255,0.5) }
+	paper-input /deep/ .label                { color: rgba(255,255,255,0.5) }
+	paper-input /deep/ #input                { color:white }
+  
+	paper-fab {
+		position: relative;
+		top: 35px;
+		right: 5px;
+		color: #aaa;
+		background-color: white;
+		transition: 0.3s;
+		z-index: 1;
+	}
+
+	paper-fab /deep/ #icon       { vertical-align: baseline } /*bug?*/
+	paper-fab:hover /deep/ #icon { color: #03a9f4 }
+
+	paper-dialog { width: 300px }
+	paper-dialog /deep/ #main { padding: 44px 24px 24px }
+	paper-dialog /deep/ #actions { padding: 4px 16px 16px }
+	paper-dialog paper-button { background: #ddd; min-width: 5em;}
+	paper-dialog paper-button:hover { background: #aae5ff }
+	paper-dialog paper-button::shadow #ripple { color: #fff }
+	    
+	paper-card { margin: 20px }
+	    
+	#container {
+		width: 100%;
+		margin: 30px;
+	}
